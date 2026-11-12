@@ -1,8 +1,8 @@
 package com.cinesleepmovies.sleepmovies.repository;
-import com.cinesleepmovies.sleepmovies.model.Compra;
+import com.cinesleepmovies.sleepmovies.model.Compras;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CompraRepository extends JpaRepository<Compra, Integer> {
+public interface ComprasRepository extends JpaRepository<Compras, Integer> {
 }

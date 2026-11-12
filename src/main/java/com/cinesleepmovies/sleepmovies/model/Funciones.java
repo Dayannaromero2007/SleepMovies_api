@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "funciones")
-public class Funcion {
+public class Funciones {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,13 +32,13 @@ public class Funcion {
             joinColumns = @JoinColumn(name = "funciones_idfunciones"),
             inverseJoinColumns = @JoinColumn(name = "peliculas_idpeliculas")
     )
-    private List<Pelicula> peliculas;
+    private List<Peliculas> peliculas;
 
 
     @ManyToMany(mappedBy = "funciones")
-    private List<Compra> compras;
+    private List<Compras> compras;
 
-    public Funcion() {}
+    public Funciones() {}
 
     public Integer getIdfunciones() { return idfunciones; }
     public void setIdfunciones(Integer idfunciones) { this.idfunciones = idfunciones; }
@@ -55,9 +55,9 @@ public class Funcion {
     public Integer getCuposDisponibles() { return cuposDisponibles; }
     public void setCuposDisponibles(Integer cuposDisponibles) { this.cuposDisponibles = cuposDisponibles; }
 
-    public List<Pelicula> getPeliculas() { return peliculas; }
-    public void setPeliculas(List<Pelicula> peliculas) { this.peliculas = peliculas; }
+    public List<Peliculas> getPeliculas() { return peliculas; }
+    public void setPeliculas(List<Peliculas> peliculas) { this.peliculas = peliculas; }
 
-    public List<Compra> getCompras() { return compras; }
-    public void setCompras(List<Compra> compras) { this.compras = compras; }
+    public List<Compras> getCompras() { return compras; }
+    public void setCompras(List<Compras> compras) { this.compras = compras; }
 }

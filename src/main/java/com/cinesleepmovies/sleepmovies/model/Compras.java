@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "compras")
-public class Compra {
+public class Compras {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +24,9 @@ public class Compra {
             joinColumns = @JoinColumn(name = "compras_idcompras"),
             inverseJoinColumns = @JoinColumn(name = "funciones_idfunciones")
     )
-    private List<Funcion> funciones;
+    private List<Funciones> funciones;
 
-    public Compra() {}
+    public Compras() {}
 
     public Integer getIdcompras() { return idcompras; }
     public void setIdcompras(Integer idcompras) { this.idcompras = idcompras; }
@@ -37,6 +37,6 @@ public class Compra {
     public Integer getCantidadBoletas() { return cantidadBoletas; }
     public void setCantidadBoletas(Integer cantidadBoletas) { this.cantidadBoletas = cantidadBoletas; }
 
-    public List<Funcion> getFunciones() { return funciones; }
-    public void setFunciones(List<Funcion> funciones) { this.funciones = funciones; }
+    public List<Funciones> getFunciones() { return funciones; }
+    public void setFunciones(List<Funciones> funciones) { this.funciones = funciones; }
 }
