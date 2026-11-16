@@ -1,5 +1,6 @@
 package com.cinesleepmovies.sleepmovies.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,17 +26,14 @@ public class Funciones {
     @Column(name = "cupos_disponibles")
     private Integer cuposDisponibles;
 
+    // Muchas funciones -> 1 película
+    @ManyToOne
+    @JoinColumn(name = "id_pelicula", nullable = false)
+    private Peliculas pelicula;
 
-    @ManyToMany
-    @JoinTable(
-            name = "peliculas_has_funciones",
-            joinColumns = @JoinColumn(name = "funciones_idfunciones"),
-            inverseJoinColumns = @JoinColumn(name = "peliculas_idpeliculas")
-    )
-    private List<Peliculas> peliculas;
-
-
-    @ManyToMany(mappedBy = "funciones")
+    // 1 función -> muchas compras (lado inverso, no sale en el JSON)
+    @OneToMany(mappedBy = "funcion")
+    @JsonIgnore
     private List<Compras> compras;
 
     public Funciones() {}
@@ -55,8 +53,8 @@ public class Funciones {
     public Integer getCuposDisponibles() { return cuposDisponibles; }
     public void setCuposDisponibles(Integer cuposDisponibles) { this.cuposDisponibles = cuposDisponibles; }
 
-    public List<Peliculas> getPeliculas() { return peliculas; }
-    public void setPeliculas(List<Peliculas> peliculas) { this.peliculas = peliculas; }
+    public Peliculas getPelicula() { return pelicula; }
+    public void setPelicula(Peliculas pelicula) { this.pelicula = pelicula; }
 
     public List<Compras> getCompras() { return compras; }
     public void setCompras(List<Compras> compras) { this.compras = compras; }

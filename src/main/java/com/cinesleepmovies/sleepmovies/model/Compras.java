@@ -1,7 +1,7 @@
 package com.cinesleepmovies.sleepmovies.model;
 
 import jakarta.persistence.*;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "compras")
@@ -18,13 +18,16 @@ public class Compras {
     @Column(name = "cantidad_boletas", nullable = false)
     private Integer cantidadBoletas;
 
-    @ManyToMany
-    @JoinTable(
-            name = "compras_has_funciones",
-            joinColumns = @JoinColumn(name = "compras_idcompras"),
-            inverseJoinColumns = @JoinColumn(name = "funciones_idfunciones")
-    )
-    private List<Funciones> funciones;
+    @Column(name = "valor_total", nullable = false)
+    private Double valorTotal;
+
+    @Column(name = "fecha_compra", nullable = false)
+    private LocalDateTime fechaCompra;
+
+    // Muchas compras -> 1 función
+    @ManyToOne
+    @JoinColumn(name = "id_funcion", nullable = false)
+    private Funciones funcion;
 
     public Compras() {}
 
@@ -37,6 +40,12 @@ public class Compras {
     public Integer getCantidadBoletas() { return cantidadBoletas; }
     public void setCantidadBoletas(Integer cantidadBoletas) { this.cantidadBoletas = cantidadBoletas; }
 
-    public List<Funciones> getFunciones() { return funciones; }
-    public void setFunciones(List<Funciones> funciones) { this.funciones = funciones; }
+    public Double getValorTotal() { return valorTotal; }
+    public void setValorTotal(Double valorTotal) { this.valorTotal = valorTotal; }
+
+    public LocalDateTime getFechaCompra() { return fechaCompra; }
+    public void setFechaCompra(LocalDateTime fechaCompra) { this.fechaCompra = fechaCompra; }
+
+    public Funciones getFuncion() { return funcion; }
+    public void setFuncion(Funciones funcion) { this.funcion = funcion; }
 }

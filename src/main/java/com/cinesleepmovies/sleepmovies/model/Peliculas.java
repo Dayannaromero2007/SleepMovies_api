@@ -1,11 +1,11 @@
 package com.cinesleepmovies.sleepmovies.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "peliculas")
-
 public class Peliculas {
 
     @Id
@@ -25,7 +25,9 @@ public class Peliculas {
     @Column(name = "clasificacion", length = 10)
     private String clasificacion;
 
-    @ManyToMany(mappedBy = "peliculas")
+    // 1 película -> muchas funciones (lado inverso, no sale en el JSON)
+    @OneToMany(mappedBy = "pelicula")
+    @JsonIgnore
     private List<Funciones> funciones;
 
     public Peliculas() {}
