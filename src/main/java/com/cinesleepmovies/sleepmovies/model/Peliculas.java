@@ -47,6 +47,17 @@ public class Peliculas {
     public String getClasificacion() { return clasificacion; }
     public void setClasificacion(String clasificacion) { this.clasificacion = clasificacion; }
 
+    @Column(length = 500)
+    private String imagen;
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
     public List<Funciones> getFunciones() { return funciones; }
     public void setFunciones(List<Funciones> funciones) { this.funciones = funciones; }
 }
