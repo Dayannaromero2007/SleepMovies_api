@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -25,6 +26,23 @@ public class ComprasService {
 
     public List<Compras> listar() {
         return comprasRepository.findAll();
+    }
+
+    // Historial por día o por rango de fechas (las dos fechas incluidas)
+    public List<Compras> listarPorFechas(LocalDate desde, LocalDate hasta) {
+        // 400: las dos fechas son obligatorias
+        if (desde == null || hasta == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Las fechas desde y hasta son obligatorias (formato yyyy-MM-dd)");
+        }
+        // 400: rango inválido
+        if (desde.isAfter(hasta)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "La fecha desde no puede ser posterior a la fecha hasta");
+        }
+        LocalDateTime inicio = desde.atStartOfDay();
+        LocalDateTime fin = hasta.plusDays(1).atStartOfDay();
+        return comprasRepository.buscarPorRango(inicio, fin);
     }
 
     @Transactional
